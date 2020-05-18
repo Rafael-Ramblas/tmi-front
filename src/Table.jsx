@@ -9,8 +9,8 @@ import TableRow from '@material-ui/core/TableRow'
 import Axios from 'axios'
 import { isEqual } from 'lodash'
 
-const StyledTableCell = ({ children }) => (
-    <TableCell style={{ color: '#f1f1f1', border: 'hidden' }}>
+const StyledTableCell = ({ children, color }) => (
+    <TableCell style={{ color: color || '#f1f1f1', border: 'hidden' }}>
         {children}
     </TableCell>
 )
@@ -48,6 +48,8 @@ const Component = () => {
     const classes = useStyles()
     const tableData = data.map((viewer, i) => ({ index: i + 1, viewer }))
 
+    console.warn(counter.current)
+
     return (
         <Table className={classes.table} aria-label='simple table'>
             <TableHead>
@@ -63,16 +65,11 @@ const Component = () => {
                             {row.index}
                         </StyledTableCell>
                         <StyledTableCell
-                            style={{
-                                color:
-                                    counter.current > 1
-                                        ? prevViewers.current.includes(
-                                              row.viewer
-                                          )
-                                            ? '#f1f1f1'
-                                            : '#6441a5'
-                                        : '#f1f1f1',
-                            }}
+                            color={
+                                counter.current > 1 &&
+                                !prevViewers.current.includes(row.viewer) &&
+                                '#6441a5'
+                            }
                         >
                             {row.viewer}
                         </StyledTableCell>
