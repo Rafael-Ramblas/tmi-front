@@ -9,8 +9,10 @@ import TableRow from '@material-ui/core/TableRow'
 import Axios from 'axios'
 import { isEqual } from 'lodash'
 
-const StyledTableCell = ({ children, color }) => (
-    <TableCell style={{ color: color || '#f1f1f1', border: 'hidden' }}>
+const StyledTableCell = ({ children, color, style }) => (
+    <TableCell
+        style={{ color: color || '#f1f1f1', border: 'hidden', ...style }}
+    >
         {children}
     </TableCell>
 )
@@ -40,7 +42,7 @@ const Component = () => {
 
     const useStyles = makeStyles({
         table: {
-            maxWidth: 500,
+            maxWidth: 300,
             backgroundColor: '#262626',
         },
     })
@@ -51,10 +53,16 @@ const Component = () => {
     console.warn(counter.current)
 
     return (
-        <Table className={classes.table} aria-label='simple table'>
+        <Table
+            className={classes.table}
+            size='small'
+            aria-label='a dense table'
+        >
             <TableHead>
                 <TableRow>
-                    <StyledTableCell>#</StyledTableCell>
+                    <StyledTableCell style={{ width: '10px' }}>
+                        #
+                    </StyledTableCell>
                     <StyledTableCell>Viewer</StyledTableCell>
                 </TableRow>
             </TableHead>
