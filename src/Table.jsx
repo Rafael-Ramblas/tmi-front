@@ -39,7 +39,7 @@ const Component = () => {
                 Axios.get('https://tmi-server.herokuapp.com/').then(
                     fetchViewers
                 ),
-            1000
+            10000
         )
         return () => clearInterval(id)
     }, [data, fetchViewers])
