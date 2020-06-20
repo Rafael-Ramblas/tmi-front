@@ -34,9 +34,13 @@ const Component = () => {
     )
 
     useEffect(() => {
-        const id = setInterval(() => {
-            Axios.get('https://tmi-server.herokuapp.com/').then(fetchViewers)
-        }, 10000)
+        const id = setInterval(
+            () =>
+                Axios.get('https://tmi-server.herokuapp.com/').then(
+                    fetchViewers
+                ),
+            1000
+        )
         return () => clearInterval(id)
     }, [data, fetchViewers])
 
@@ -49,8 +53,6 @@ const Component = () => {
 
     const classes = useStyles()
     const tableData = data.map((viewer, i) => ({ index: i + 1, viewer }))
-
-    console.warn(counter.current)
 
     return (
         <Table
@@ -76,7 +78,7 @@ const Component = () => {
                             color={
                                 counter.current > 1 &&
                                 !prevViewers.current.includes(row.viewer) &&
-                                '#6441a5'
+                                '#b9a3e3'
                             }
                         >
                             {row.viewer}
